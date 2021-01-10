@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Financial Calculations</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+
+    <body>
+        <div class="container" ng-app="tabPanel">
+            <div class="jumbotron" ng-controller="headerCtrl">
+                <h1 id="title">{{header}}</h1>
+                <br />
+                <div class="tab-controller-wrap" ng-controller="tabCtrl" ng-click="tabChange($event)">
+                    <div id="tab-wrapper">
+                    <a href="#compoundInterest" class="tab-control" ng-class="{'active':tabSelected=='#compoundInterest'}">Compound Interest</a>
+                    <a href="#rateOfReturn" class="tab-control" ng-class="{'active':tabSelected=='#rateOfReturn'}">Rate of Return</a>
+                    <a href="#Amortization" class="tab-control" ng-class="{'active':tabSelected=='#Amortization'}">Amortization</a>
+                    <a href="#FV" class="tab-control" ng-class="{'active':tabSelected=='#FV'}">Future Value</a>
+                    <a href="#PtoE" class="tab-control" ng-class="{'active':tabSelected=='#PtoE'}">Price to Earnings</a>
+                    <a href="#salary" class="tab-control" ng-class="{'active':tabSelected=='#salary'}">Salary</a>
+                    </div>
+                    <br />
+                    <br />
+                        <!-- Compound Interest -->
+                        <div id="compoundInterest" class="ng-hide" ng-show="tabSelected=='#compoundInterest'">
+                            <form ng-controller="compIntCtrl">
+                                <div class="container">
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                        <label for="CompIntPrincipal">Original Principal</label>
+                                        <p><input id="CompIntPrincipal" ng-change="computeCompInt()" ng-model="compIntObj.compIntP"></input></p>
+                                        </div>
+                                        <div class="row">
+                                        <label for="CompIntAnnual">Annual Interest Rate (as decimal)</label>
+                                        <p><input id="CompIntAnnual" ng-change="computeCompInt()" ng-model="compIntObj.compIntR"></input></p>
+                                        </div>
+                                        <div class="row">
+                                        <label for="CompIntperiods">Number of compounding periods per year</label>
+                                        <p><input id="CompIntperiods" ng-change="computeCompInt()" ng-model="compIntObj.compIntN"></input></p>
+                                        </div>
+                                        <div class="row">
+                                        <label for="CompIntyears">Years</label>
+                                        <p><input id="CompIntyears" ng-change="computeCompInt()" ng-model="compIntObj.compIntT"></input></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 result">
+                                    <h4>Investment balance after {{compIntObj.compIntT}} years:</h4><h2>{{compIntObj.compIntOutput | number:0}}</h2>
+                                    </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Rate of Return-->
+                        <div id="rateOfReturn" class="ng-hide" ng-show="tabSelected=='#rateOfReturn'">
+                            <form ng-controller="RoRCtrl">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                            <label for="RoRA">Initial Value:</label>
+                                            <p><input id="RoRA" ng-change="computeRoR()" ng-model="RoRObj.RoRIni"></input></p>
+                                            </div>
+                                            <div class="row">
+                                            <label for="RoRB">Final Value:</label>
+                                            <p><input id="RoRB" ng-change="computeRoR()" ng-model="RoRObj.RoRFin"></input></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 result">
+                                            <h4>Return:</h4><h2> {{RoRObj.RoROutput | number:0}}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Amortization Calculator -->
+                        <div id="Amortization" class="ng-hide" ng-show="tabSelected=='#Amortization'">
+                            <form ng-controller="AmortCtrl">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                            <label for="AmortA">Principal:</label>
+                                            <p><input id="AmortA" ng-change="computeAmort()" ng-model="AmortObj.AmortPrincipal"></input></p>
+                                            </div>
+                                            <div class="row">
+                                            <label for="AmortB">Periodic Interest Rate</label>
+                                            <p><input id="AmortB" ng-change="computeAmort()" ng-model="AmortObj.AmortIntRate"></input></p>
+                                            </div>
+                                            <div class="row">
+                                            <label for="AmortC">Total Number of Payments</label>
+                                            <p><input id="AmortC" ng-change="computeAmort()" ng-model="AmortObj.AmortNoPay"></input></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 result">
+                                            <h4>Periodic Payment Amount:</h4><h2> {{AmortObj.AmortOutput | number:0}}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="FV" class="ng-hide" ng-show="tabSelected=='#FV'">
+                            <form ng-controller="FVCtrl">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <label for="FVA">Present Value:</label>
+                                                <p><input id="FV" ng-change="computeFV()" ng-model="FVObj.FVPv"></input></p>
+                                            </div>
+                                            <div class="row">
+                                                <label for="FVB">Interest Rate</label>
+                                                <p><input id="FVB" ng-change="computeFV()" ng-model="FVObj.FVRate"></input></p>
+                                            </div>
+                                            <div class="row">
+                                                <label for="FVC">Number of years</label>
+                                                <p><input id="FVC" ng-change="computeFV()" ng-model="FVObj.FVYear"></input></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 result">
+                                            <h4>Future value in {{FVObj.FVYear}}:</h4><h2>{{FVObj.FVOutput | number:0 }}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="PtoE" class="ng-hide" ng-show="tabSelected=='#PtoE'">
+                            <form ng-controller="PtoECtrl">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <label for="PtoEA">Market Price Per Share</label>
+                                                <p><input id="PtoEA" ng-change="computePtoE()" ng-model="PtoEObj.PtoEMarket"></input></p>
+                                            </div>
+                                            <div class="row">
+                                                <label for="PtoEB">Earnings Per Share</label>
+                                                <p><input id="PtoEB" ng-change="computePtoE()" ng-model="PtoEObj.PtoEEarn"></input></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 result">
+                                            <h4>Price to Earnings Ratio:</h4><h2>{{PtoEObj.PtoEOutput | number:0}}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="salary" class="ng-hide" ng-show="tabSelected=='#salary'">
+                            <form ng-controller="salaryCtrl">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <label for="salaryA">Hourly Wage</label>
+                                                <p><input id="salaryA" ng-change="computeSalary()" ng-model="salaryObj.salaryWage"></input></p>
+                                            </div>
+                                            <div class="row">
+                                                <label for="salaryB">Hours worked per week</label>
+                                                <p><input id="salaryB" ng-change="computeSalary()" ng-model="salaryObj.salaryPerWeek"></input></p>
+                                            </div>
+                                            <div class="row">
+                                                <label for="salaryC">Weeks worked per Year</label>
+                                                <p><input id="salaryC" ng-change="computeSalary()" ng-model="salaryObj.salaryPerYear"></input></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 result">
+                                            <h4>Yearly Salary</h4><h2>{{salaryObj.salaryOutput | number:0}}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="footer">
+                            <a href="#">Joel Ansbro</a>   <a href="#">GitHub</a>   <a href="#">Twitter</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="calc.js"></script>
+
+    </body>
+
+
+</html>
