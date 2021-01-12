@@ -30,7 +30,7 @@
                     </div>
                     <br />
                     <br />
-                        <!-- Compound Interest -->
+                    
                         <div id="compoundInterest" class="ng-hide" ng-show="tabSelected=='#compoundInterest'">
                             <form ng-controller="compIntCtrl">
                                 <div class="container">
@@ -41,7 +41,7 @@
                                         <p><input id="CompIntPrincipal" ng-change="computeCompInt()" ng-model="compIntObj.compIntP"></input></p>
                                         </div>
                                         <div class="row">
-                                        <label for="CompIntAnnual">Annual Interest Rate (as decimal)</label>
+                                        <label for="CompIntAnnual">Annual Interest Rate (%)</label>
                                         <p><input id="CompIntAnnual" ng-change="computeCompInt()" ng-model="compIntObj.compIntR"></input></p>
                                         </div>
                                         <div class="row">
@@ -61,7 +61,6 @@
                             </form>
                         </div>
 
-                        <!-- Rate of Return-->
                         <div id="rateOfReturn" class="ng-hide" ng-show="tabSelected=='#rateOfReturn'">
                             <form ng-controller="RoRCtrl">
                                 <div class="container">
@@ -84,7 +83,6 @@
                             </form>
                         </div>
 
-                        <!-- Amortization Calculator -->
                         <div id="Amortization" class="ng-hide" ng-show="tabSelected=='#Amortization'">
                             <form ng-controller="AmortCtrl">
                                 <div class="container">
@@ -187,11 +185,11 @@
                         <hr />
                     </div>
                 </div>
-                    <div class="row">
-                        <div class="footer">
-                            <a href="https://www.linkedin.com/in/joel-ansbro-9694b8171/">Joel Ansbro</a>   <a href="https://github.com/joelansbro">GitHub</a>   <a href="https://twitter.com/joel_ansbro">Twitter</a>
-                        </div>
+                <div class="row">
+                    <div class="footer bg-white">
+                        <a href="https://www.linkedin.com/in/joel-ansbro-9694b8171/">Joel Ansbro</a>   <a href="https://github.com/joelansbro">GitHub</a>   <a href="https://twitter.com/joel_ansbro">Twitter</a>
                     </div>
+                </div>
             </div>
         </div>
         <script src="calc.js"></script>

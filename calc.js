@@ -19,13 +19,15 @@ app.controller('compIntCtrl', function($scope){
     $scope.compIntObj = {
         compIntP: 0,    
         compIntR: 0,
+        compIntRby100:0,
         comptIntN: 0,
         compIntT: 0,
         compIntOutput: 0,
     };
 
     let computeCompInt = function(){
-        $scope.compIntObj.compIntOutput = $scope.compIntObj.compIntP * Math.pow(1 + $scope.compIntObj.compIntR/$scope.compIntObj.compIntN, $scope.compIntObj.compIntN * $scope.compIntObj.compIntT);
+        $scope.compIntObj.compIntRby100 = $scope.compIntObj.comIntR / 100;
+        $scope.compIntObj.compIntOutput = $scope.compIntObj.compIntP * Math.pow(1 + $scope.compIntObj.compIntRby100/$scope.compIntObj.compIntN, $scope.compIntObj.compIntN * $scope.compIntObj.compIntT);
     }
 
 

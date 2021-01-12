@@ -92,3 +92,7 @@ input:focus {
 label {
     font-size: large;
 }
+
+.bg-white{
+    background-color: white;
+}
