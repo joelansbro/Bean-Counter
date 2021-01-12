@@ -26,7 +26,7 @@ app.controller('compIntCtrl', function($scope){
     };
 
     let computeCompInt = function(){
-        $scope.compIntObj.compIntRby100 = $scope.compIntObj.comIntR / 100;
+        $scope.compIntObj.compIntRby100 = $scope.compIntObj.compIntR / 100;
         $scope.compIntObj.compIntOutput = $scope.compIntObj.compIntP * Math.pow(1 + $scope.compIntObj.compIntRby100/$scope.compIntObj.compIntN, $scope.compIntObj.compIntN * $scope.compIntObj.compIntT);
     }
 
