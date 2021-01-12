@@ -85,7 +85,7 @@ app.controller('FVCtrl', function($scope){
     };
 
     let computeFV = function(){
-        $scope.FVObj.FVRateByPv = ($scope.FVObj.FVRate / 100 ) * $scope.FVObj.FVPv);
+        $scope.FVObj.FVRateByPv = ($scope.FVObj.FVRate / 100 ) * $scope.FVObj.FVPv;
         $scope.FVObj.FVOutput = $scope.FVObj.FVPv * Math.pow((1 + $scope.FVObj.FVRateByPv), $scope.FVObj.FVYear);
     }
 
