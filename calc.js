@@ -79,12 +79,14 @@ app.controller('FVCtrl', function($scope){
     $scope.FVObj = {
         FVPv: 0,
         FVRate: 0,
+        FVRateByPv: 0,
         FVYear: 0,
         FVOutput: 0
     };
 
     let computeFV = function(){
-        $scope.FVObj.FVOutput = $scope.FVObj.FVPv * Math.pow((1 + $scope.FVObj.FVRate), $scope.FVObj.FVYear);
+        $scope.FVObj.FVRateByPv = ($scope.FVObj.FVRate / 100 ) * $scope.FVObj.FVPv) 
+        $scope.FVObj.FVOutput = $scope.FVObj.FVPv * Math.pow((1 + $scope.FVObj.FVRateByPv), $scope.FVObj.FVYear);
     }
 
     $scope.$watch('FVObj.FVPv', computeFV);
